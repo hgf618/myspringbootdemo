@@ -1,0 +1,65 @@
+mybatis:
+  # 指定 mapper.xml 的位置
+  mapper-locations: classpath:mapping/*.xml
+  #扫描实体类的位置,在此处指明扫描实体类的包，在 mapper.xml 中就可以不写实体类的全路径名
+  type-aliases-package: com.dfby.demo.pojo
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bbs?characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5                                                                 #初始化连接大小
+      min-idle: 5                                                                     #最小连接池数量
+      max-active: 20                                                                  #最大连接池数量
+      max-wait: 60000                                                                 #获取连接时最大等待时间，单位毫秒
+      time-between-eviction-runs-millis: 60000                                        #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000                                          #配置一个连接在池中最小生存的时间，单位是毫秒
+      validation-query: SELECT 1 FROM DUAL                                            #测试连接
+      test-while-idle: true                                                           #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+      test-on-borrow: false                                                           #获取连接时执行检测，建议关闭，影响性能
+      test-on-return: false                                                           #归还连接时执行检测，建议关闭，影响性能
+      pool-prepared-statements: false                                                 #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
+      max-pool-prepared-statement-per-connection-size: 20                             #开启poolPreparedStatements后生效
+      filters: stat,wall                                                              #配置扩展插件，常用的插件有=>stat:监控统计  wall:防御sql注入
+      connection-properties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000' #通过connectProperties属性来打开mergeSql功能;慢SQL记录
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet:
+        enabled: true                                                                 #是否开启内置监控页面，默认值为 false
+        url-pattern: '/druid/*'                                                       #StatViewServlet 的映射路径，即内置监控页面的访问地址
+        reset-enable: true                                                            #是否启用重置按钮
+        login-username: admin                                                         #内置监控页面的登录页用户名 username
+        login-password: admin                                                         #内置监控页面的登录页密码 password
+      # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter:
+        enabled: true                                                                 #是否开启内置监控中的 Web-jdbc 关联监控的数据
+        url-pattern: '/*'                                                             #匹配路径
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'                     #排除路径
+        session-stat-enable: true                                                     #是否监控session
+      # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
+      aop-patterns: net.biancheng.www.*                                               #Spring监控AOP切入点，如x.y.z.abc.*,配置多个英文逗号分隔
+  redis:
+    host: localhost
+    port: 6379
+    # 连接超时时间
+    timeout: 10000ms
+    jedis:
+      pool:
+        max-idle: 8
+        max-active: 8
+        max-wait: 2000ms
+  cache:
+    cache-names: rediscache
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
+  devtools:
+    restart:
+      enabled: true

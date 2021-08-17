@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common::header('添加')"/>
+</head>
+<body>
+<form class="form-horizontal" name="addForm" method="post" action="/stuinfo6_add">
+    <div class="form-group">
+        <label for="stuno" class="col-sm-3 control-label">学号：</label>
+        <div class="col-sm-9">
+         <input type="text" class="form-control" id="stuno" name="stuno" placeholder="学号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stuname" class="col-sm-3 control-label">姓名：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuname" name="stuname" placeholder="姓名">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="male" class="col-sm-3 control-label"> 性别：</label>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input type="radio" name="stusex" id="male" value="男"> 男
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="stusex" id="remale" value="女"> 女
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stuage" class="col-sm-3 control-label">年龄：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuage" name="stuage" placeholder="年龄">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="stuseat" class="col-sm-3 control-label">座位：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuseat" name="stuseat" placeholder="座位">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stupid" class="col-sm-3 control-label">身份证：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stupid" name="stupid" placeholder="身份证">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stuaddress" class="col-sm-3 control-label">地址：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuaddress" name="stuaddress" placeholder="地址">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-default">添加</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-default"  onclick="history.back()">返回</button>&nbsp;&nbsp;
+        </div>
+    </div>
+</form>
+</body>
+</html>

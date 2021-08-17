@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfby.demo.mapper.StuinfoMapper">
+  <resultMap id="BaseResultMap" type="com.dfby.demo.pojo.Stuinfo">
+    <id column="stuNo" jdbcType="CHAR" property="stuno" />
+    <result column="stuName" jdbcType="VARCHAR" property="stuname" />
+    <result column="stuSex" jdbcType="CHAR" property="stusex" />
+    <result column="stuAge" jdbcType="INTEGER" property="stuage" />
+    <result column="stuSeat" jdbcType="INTEGER" property="stuseat" />
+    <result column="stuPID" jdbcType="CHAR" property="stupid" />
+    <result column="stuAddress" jdbcType="VARCHAR" property="stuaddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    stuNo, stuName, stuSex, stuAge, stuSeat, stuPID, stuAddress
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stuinfo
+    where stuNo = #{stuno,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stuinfo
+    where stuNo = #{stuno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dfby.demo.pojo.Stuinfo">
+    insert into stuinfo (stuNo, stuName, stuSex, 
+      stuAge, stuSeat, stuPID, 
+      stuAddress)
+    values (#{stuno,jdbcType=CHAR}, #{stuname,jdbcType=VARCHAR}, #{stusex,jdbcType=CHAR}, 
+      #{stuage,jdbcType=INTEGER}, #{stuseat,jdbcType=INTEGER}, #{stupid,jdbcType=CHAR}, 
+      #{stuaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dfby.demo.pojo.Stuinfo">
+    insert into stuinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuno != null">
+        stuNo,
+      </if>
+      <if test="stuname != null">
+        stuName,
+      </if>
+      <if test="stusex != null">
+        stuSex,
+      </if>
+      <if test="stuage != null">
+        stuAge,
+      </if>
+      <if test="stuseat != null">
+        stuSeat,
+      </if>
+      <if test="stupid != null">
+        stuPID,
+      </if>
+      <if test="stuaddress != null">
+        stuAddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuno != null">
+        #{stuno,jdbcType=CHAR},
+      </if>
+      <if test="stuname != null">
+        #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="stusex != null">
+        #{stusex,jdbcType=CHAR},
+      </if>
+      <if test="stuage != null">
+        #{stuage,jdbcType=INTEGER},
+      </if>
+      <if test="stuseat != null">
+        #{stuseat,jdbcType=INTEGER},
+      </if>
+      <if test="stupid != null">
+        #{stupid,jdbcType=CHAR},
+      </if>
+      <if test="stuaddress != null">
+        #{stuaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dfby.demo.pojo.Stuinfo">
+    update stuinfo
+    <set>
+      <if test="stuname != null">
+        stuName = #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="stusex != null">
+        stuSex = #{stusex,jdbcType=CHAR},
+      </if>
+      <if test="stuage != null">
+        stuAge = #{stuage,jdbcType=INTEGER},
+      </if>
+      <if test="stuseat != null">
+        stuSeat = #{stuseat,jdbcType=INTEGER},
+      </if>
+      <if test="stupid != null">
+        stuPID = #{stupid,jdbcType=CHAR},
+      </if>
+      <if test="stuaddress != null">
+        stuAddress = #{stuaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stuNo = #{stuno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dfby.demo.pojo.Stuinfo">
+    update stuinfo
+    set stuName = #{stuname,jdbcType=VARCHAR},
+      stuSex = #{stusex,jdbcType=CHAR},
+      stuAge = #{stuage,jdbcType=INTEGER},
+      stuSeat = #{stuseat,jdbcType=INTEGER},
+      stuPID = #{stupid,jdbcType=CHAR},
+      stuAddress = #{stuaddress,jdbcType=VARCHAR}
+    where stuNo = #{stuno,jdbcType=CHAR}
+  </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from stuinfo
+  </select>
+
+  <select id="selectCountByCon" resultType="int" parameterType="Stuinfo">
+     select count(*) from stuinfo
+     <where>
+       <if test="stuno!=null">
+         and stuno=#{stuno}
+       </if>
+     </where>
+  </select>
+
+  <select id="selectPageListByCon" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select * from stuinfo
+    <where>
+      <if test="stuinfo.stuno!=null and stuinfo.stuno!=''">
+        and stuno=#{stuinfo.stuno}
+      </if>
+    </where>
+    <if test="pageStart!=null and pageSize!=null">
+      limit #{pageStart},#{pageSize}
+    </if>
+  </select>
+
+  <select id="selectByCon" resultMap="BaseResultMap" parameterType="Stuinfo">
+      select * from stuinfo
+    <where>
+      <if test="stuno!=null and stuno!=''">
+        and stuno=#{stuno}
+      </if>
+    </where>
+  </select>
+
+</mapper>

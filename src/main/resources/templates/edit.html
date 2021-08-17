@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common::header('编辑')"/>
+</head>
+<body>
+<h2>编辑</h2>
+
+
+<form class="form-horizontal" name="addForm" method="post" action="/stuinfo6_update">
+            <input type="hidden" class="form-control" id="stuno" name="stuno"  th:value="${stuinfo.stuno}">
+
+    <div class="form-group">
+        <label for="stuname" class="col-sm-3 control-label">姓名：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuname" name="stuname" th:value="${stuinfo.stuname}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="male" class="col-sm-3 control-label"> 性别：</label>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input th:if="${stuinfo.stusex!='男'}" type="radio" id="male" name="stusex" th:value="男">
+                <input th:if="${stuinfo.stusex=='男'}" type="radio" name="stusex" th:value="男" checked>男
+            </label>
+            <label class="radio-inline">
+                <input th:if="${stuinfo.stusex!='女'}" type="radio" name="stusex" th:value="女" >
+                <input th:if="${stuinfo.stusex=='女'}" type="radio" name="stusex" th:value="女" checked>女
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stuage" class="col-sm-3 control-label">年龄：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuage" name="stuage" th:value="${stuinfo.stuage}">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="stuseat" class="col-sm-3 control-label">座位：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuseat" name="stuseat" th:value="${stuinfo.stuseat}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stupid" class="col-sm-3 control-label">身份证：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stupid" name="stupid" th:value="${stuinfo.stupid}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stuaddress" class="col-sm-3 control-label">地址：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="stuaddress" name="stuaddress" th:value="${stuinfo.stuaddress}">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-default">修改</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-default"  onclick="history.back()">返回</button>&nbsp;&nbsp;
+        </div>
+    </div>
+</form>
+</body>
+</html>
